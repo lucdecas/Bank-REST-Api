@@ -1,0 +1,140 @@
+swagger: '2.0'
+info:
+  description: API para transações bancárias
+  version: 1.0.0
+  title: Bank Account API
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+basePath: /Bank
+
+paths:
+  /accounts/{id}:
+    get:
+      summary: Account current currency amount
+      description: |
+        Show user's current currency amount
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        description: Client account id 
+        required: true
+      responses:
+        200:
+          description: current amount found
+        404:
+          description: account not found
+        500:
+          description: internal server error
+  /accounts/{id}/deposit:
+    post:
+      summary: Deposit currency to account
+      description: |
+        Show user's current currency amount
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        description: Client account id 
+        required: true
+      - in: body
+        name: amount
+        description: Client account id 
+        schema: 
+          $ref: '#/definitions/Currency'
+        required: true
+      responses:
+        201:
+          description: deposit request created
+        404:
+          description: account not found
+        422:
+          description: invalid amount format
+        500:
+          description: internal server error
+  /accounts/{id}/withdraw:
+    put:
+      summary: Withdraw currency from account
+      description: |
+        Withdraw currency amount
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        description: Client account id 
+        required: true
+      - in: body
+        name: amount
+        description: Client account id 
+        schema: 
+          $ref: '#/definitions/Currency'
+        required: true
+      responses:
+        200:
+          description: currency withdrawed
+        400: 
+          description: withdrawal not allowed
+        404:
+          description: account not found
+        422:
+          description: invalid amount format
+        500:
+          description: internal server error
+          
+  /accounts/{id}/transfer/{receiver_id}:
+    post:
+      summary: Transfer currency to receiver's account
+      description: |
+        Transfer currency from one account to another
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: id
+        type: integer
+        description: sender account id 
+        required: true
+      - in: path
+        name: receiver_id
+        type: integer
+        description: receiver account id 
+        required: true
+      - in: body
+        name: amount
+        description: Client account id 
+        schema: 
+          $ref: '#/definitions/Currency'
+        required: true
+      responses:
+        201:
+          description: transfer request created
+        400: 
+          description: transfer not allowed
+        404:
+          description: account not found
+        422:
+          description: invalid amount format
+        500:
+          description: internal server error
+        
+definitions:
+  Currency:
+    type: object
+    properties:
+      amount:
+        type: integer
+        example: "2500"
+        description: "R$ 25,00 seria passado como 2500"
+
+schemes:
+ - https
