@@ -1,0 +1,35 @@
+API de Conta Bancária
+
+Desafio: desenvolver uma api REST que represente um sistema de conta bancária.
+
+A api precisa oferecer endpoints para as operações básicas:
+
+Depósito
+Saque
+Transferência entre contas
+Extrato
+
+Regras
+
+O banco não permite que a conta tenha saldo negativo, portanto o cliente não pode sacar nem transferir um dinheiro que ele não tem
+O banco cobra uma taxa por cada operação (essas taxas precisam ser refletidas no extrato):
+Depósito: 1% sobre o valor depositado
+Saque: R$ 4,00 sobre o valor do saque
+Transferência: R$ 1,00
+
+Requisitos
+
+Código precisa ser versionado com git e hospedado no GitHub
+Os endpoints da api precisam ser documentados (pode ficar num arquivo .md dentro do repositório mesmo)
+O sistema deve ter testes automatizados
+A api precisa estar pública e disponível na internet
+O código precisa ser escrito em C# com framework ASP.NET Core 2.2 (https://docs.microsoft.com/pt-br/aspnet/core/?view=aspnetcore-2.2)
+
+O que avaliaremos:
+
+Entendimento do problema
+Modelagem do sistema
+Estrutura e legibilidade do código
+Tratamentos de erro
+Testes
+Funcionamento da API

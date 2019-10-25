@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.Serialization;
 
 namespace BankAccount.Domain.Models
@@ -10,6 +11,10 @@ namespace BankAccount.Domain.Models
 
         public Currency(int amount)
         {
+            if (amount < 0)
+            {
+                throw new Exception("Invalid amount: " + amount);
+            }
             this.amount = amount;
         }
 

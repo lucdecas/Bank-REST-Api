@@ -12,7 +12,7 @@ namespace BankAccountTest.Domain.Services
     {
         Mock<IAccountRepository> mock = new Mock<IAccountRepository>();
         
-        private Currency currency = new Currency(1000);
+        private int currency = 1000;
         private int accountId = 1;
 
         [TestMethod]
@@ -24,7 +24,7 @@ namespace BankAccountTest.Domain.Services
             mock.Setup(m => m.FindAccountById(accountId)).Returns(account);
 
             Account resultAccount = accountService.getAccountStatements(accountId);
-            Assert.AreEqual(currency.Amount, resultAccount.Currency.Amount);
+            Assert.AreEqual(currency, resultAccount.Currency.Amount);
         }
 
         [TestMethod]
@@ -67,8 +67,8 @@ namespace BankAccountTest.Domain.Services
         public void ShouldTransferCurrency()
         {
             int receiverAccountId = 2;
-            Account account = new Account(accountId, new Currency(currency.Amount));
-            Account receiverAccount = new Account(receiverAccountId,new Currency(currency.Amount));
+            Account account = new Account(accountId, currency);
+            Account receiverAccount = new Account(receiverAccountId,currency);
 
             AccountService accountService = new AccountService(mock.Object);
             mock.Setup(m => m.FindAccountById(accountId)).Returns(account);

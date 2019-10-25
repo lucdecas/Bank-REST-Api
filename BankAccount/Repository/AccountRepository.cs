@@ -15,7 +15,7 @@ namespace BankAccount.Repository
         public Account FindAccountById(int id)
         {
             // Busca pelo ID em um repositório com try catch para saber se account existe
-            return new Account(id,new Currency(0));
+            return new Account(id,0);
         }
 
     }

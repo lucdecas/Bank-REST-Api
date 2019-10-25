@@ -12,7 +12,7 @@ namespace BankAccountTest.Domain.Models
     {
 
         public int accountId = 1;
-        public Currency currency = new Currency(100);
+        public int currency = 100;
 
         [TestMethod]
         public void shouldCreateAccount()
