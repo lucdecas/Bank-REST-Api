@@ -7,15 +7,16 @@ namespace BankAccount.Repository
 
         public AccountRepository() { }
 
-        public void Save(Account account)
-        {
-            // Salvar em um repositório
-        }
-
         public Account FindAccountById(int id)
         {
             // Busca pelo ID em um repositório com try catch para saber se account existe
-            return new Account(id,0);
+            //TODO: Implementar método 
+            return new Account(id, 0);
+        }
+
+        public void Save(Account account)
+        {
+            // Salvar em um repositório
         }
 
     }

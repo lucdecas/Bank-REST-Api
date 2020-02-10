@@ -5,6 +5,7 @@ using BankAccount.Repository;
 using Microsoft.AspNetCore.Mvc;
 using BankAccount.Domain.Models;
 using System.Web.Script.Serialization;
+using System.Net;
 
 namespace BankAccount.Controllers
 {
@@ -30,54 +31,55 @@ namespace BankAccount.Controllers
         }
 
         [HttpPost("{id}/deposit")]
-        public void DepositCurrency(int id, [FromBody] RequestBody request)
+        public ActionResult DepositCurrency(int id, [FromBody] RequestBody request)
         {
             try
             {
                 accountService.depositCurrency(id, request.amount);
+                return Ok();
             }
             catch (Exception e)
             {
-                defineErrorReason(e);
+                return defineErrorReason(e);
             }
         }
 
         [HttpPut("{id}/withdraw")]
-        public void WithdrawCurrency(int id,[FromBody] RequestBody request)
+        public ActionResult WithdrawCurrency(int id,[FromBody] RequestBody request)
         {
             try
             {
                 accountService.withdrawCurrency(id, request.amount);
+                return Ok();
             }
             catch (Exception e)
             {
-                defineErrorReason(e);
+                return defineErrorReason(e);
             }
         }
 
         [HttpPost("{id}/transfer/{receiverId}")]
-        public void TransferCurrency(int id, int receiverId, RequestBody request)
+        public ActionResult TransferCurrency(int id, int receiverId, RequestBody request)
         {
             try
             {
                 accountService.transferCurrency(id, receiverId, request.amount);
+                return Ok();
             }
             catch (Exception e)
             {
-                defineErrorReason(e);
+                return defineErrorReason(e);
             }
         }
 
-        private void defineErrorReason(Exception ex)
+        private ActionResult defineErrorReason(Exception ex)
         {
             if (ex is OperationNotAllowedException || ex is AccountNotFoundException)
             {
-                throw new ApiException(400, ex.Message);
+                return BadRequest();
             }
 
-            throw new ApiException(500, ex.Message);
+            return StatusCode(500);
         }
     }
-
-
 }

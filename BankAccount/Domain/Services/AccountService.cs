@@ -42,11 +42,9 @@ namespace BankAccount.Domain.Services
             account.RequestTransfer(amount);
             receiverAccount.ReceiveTransfer(amount);
 
-            //idealmente os saves seriam realizados através de uma transação
+            //Os saves serão realizados através de uma transação
             accountRepository.Save(account);
             accountRepository.Save(receiverAccount);
         }
-
-
     }
 }
